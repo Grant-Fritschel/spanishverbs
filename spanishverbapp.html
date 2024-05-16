@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish Verb Quiz</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #question {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #answer {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+</head>
+<body>
+<h1>Spanish Verb Quiz</h1>
+<div id="question"></div>
+<input type="text" id="userAnswer" placeholder="Type your answer here">
+<button onclick="checkAnswer()">Check Answer</button>
+<button onclick="getNewQuestion()">Get New Question</button>
+<div id="answer"></div>
+
+<script>
+    var questions = [
+        { question: "Translate the following statement: I write.", answer: "escribo" },
+        { question: "Translate the following statement: I write stories.", answer: "escribo cuentos" },
+        { question: "Translate the following statement: You dance.", answer: "bailas" },
+        { question: "Translate the following statement: She draws.", answer: "dibuja" },
+        { question: "Translate the following statement: We listen to music.", answer: "escuchamos música" },
+        { question: "Translate the following statement: They ski.", answer: "esquían" },
+        { question: "Translate the following statement: He talks on the phone.", answer: "habla por teléfono" },
+        { question: "Translate the following statement: You go to school.", answer: "vas a la escuela" },
+        { question: "Translate the following statement: I play video games.", answer: "juego videojuegos" },
+        { question: "Translate the following statement: She reads magazines.", answer: "lee revistas" },
+        { question: "Translate the following statement: We ride a bicycle.", answer: "montamos en bicicleta" },
+        { question: "Translate the following statement: They skateboard.", answer: "montan en monopatín" },
+        { question: "Translate the following statement: You swim.", answer: "nadas" },
+        { question: "Translate the following statement: He spends time with friends.", answer: "pasa tiempo con amigos" },
+        { question: "Translate the following statement: I skate.", answer: "patino" },
+        { question: "Translate the following statement: We play sports.", answer: "practicamos deportes" },
+        { question: "Translate the following statement: She plays the guitar.", answer: "toca la guitarra" },
+        { question: "Translate the following statement: You work.", answer: "trabajas" },
+        { question: "Translate the following statement: They use the computer.", answer: "usan la computadora" },
+        { question: "Translate the following statement: He watches television.", answer: "ve la tele" },
+        { question: "Translate the following statement: I sing.", answer: "canto" },
+        { question: "Translate the following statement: You run.", answer: "corres" }
+    ];
+
+    function getRandomQuestion() {
+        var randomIndex = Math.floor(Math.random() * questions.length);
+        return questions[randomIndex];
+    }
+
+    function displayQuestion() {
+        var questionObject = getRandomQuestion();
+        document.getElementById("question").textContent = questionObject.question;
+        document.getElementById("answer").textContent = "";
+        document.getElementById("userAnswer").value = "";
+        sessionStorage.setItem("currentAnswer", questionObject.answer);
+    }
+
+    function checkAnswer() {
+        var userAnswer = document.getElementById("userAnswer").value.trim().toLowerCase();
+        var correctAnswer = sessionStorage.getItem("currentAnswer").toLowerCase();
+        if (userAnswer === correctAnswer) {
+            document.getElementById("answer").textContent = "Correct!";
+        } else {
+            document.getElementById("answer").textContent = "Incorrect. Try again.";
+        }
+    }
+
+    function getNewQuestion() {
+        displayQuestion();
+    }
+
+    window.onload = displayQuestion;
+</script>
+</body>
+</html>
